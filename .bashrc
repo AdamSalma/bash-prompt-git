@@ -7,6 +7,9 @@ function __status() {
         local _repo_name="$(git remote show origin -n | grep 'Fetch URL:' | sed -E 's#^.*/(.*)$#\1#' | sed 's#.git$##')"
 
         echo "$txtbold$txtred$_repo_name $txtcyan$branch $txtwhite$all changes$txtreset\n"
+
+        rm --force ./.git/index.lock
+
     else
         # File
         local _all_count="$(ls -1 | wc -l)"
@@ -16,6 +19,7 @@ function __status() {
 
         echo "$txtcyan\W: $txtreset$_folder_count dirs | $_file_count files | $_dir_size\n"
     fi
+
 }
 
 function set_prompt() {
@@ -46,7 +50,7 @@ function set_prompt() {
     # time
     PS1+="$txtwhite$txtbold[-\A-] "
     # user
-    PS1+="$txtcyan\u:"
+    PS1+="$txtgreen\u:"
     # directory
     PS1+="$txtyellow[\w] "
     # host
