@@ -46,7 +46,7 @@ function __status() {
         _stats+=", $_dir_size"
     fi
 
-    _stats+="\n"
+    _stats+="$txtreset\n"
     echo "$_stats"
 }
 
