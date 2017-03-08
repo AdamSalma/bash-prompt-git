@@ -14,7 +14,7 @@ function __status() {
         # Repo name
         _stats+="$txtbold$txtred$_repo_name "
         # Branch
-        _stats+="$txtcyan$branch "
+        _stats+="$txtcyan$branch$txtreset "
 
 
         # Commited changes
