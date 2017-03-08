@@ -46,7 +46,6 @@ function __status() {
         _stats+=", $_dir_size"
     fi
 
-    _stats+="$txtreset\n"
     echo "$_stats"
 }
 
@@ -73,7 +72,7 @@ function set_prompt() {
     # user
     PS1+="$txtgreen\u:"
     # directory
-    PS1+="$txtyellow[\w] "
+    PS1+="$txtyellow[\w]$txtreset "
 
     # host
     # PS1+="$txtreset$txtpurple(\h)"
@@ -83,6 +82,7 @@ function set_prompt() {
 ## Line 2 ##
     PS1+="$(__status)"
 
+    PS1+="$txtreset\n"
     # trail
     PS1+="$ "
 }
