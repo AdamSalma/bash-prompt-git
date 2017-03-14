@@ -19,7 +19,7 @@ function __status() {
 
         # Commited changes
         if [[ $commit_num > 0 ]]; then
-            _stats+="$txtbold$txtgreen$commit_num $txtreset$commit_position "
+            _stats+="$txtbold$txtpurple$commit_num $commit_position$txtreset "
         fi
 
         # Uncommited changes
