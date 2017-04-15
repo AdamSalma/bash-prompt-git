@@ -6,9 +6,9 @@ function __status() {
     # Git repo status
     if [[ ! -z $branch ]]; then
         local _status="$(git status --porcelain)"
-        local _changes="$(echo "$_status" | grep 'M' | wc -l )"
-        local unstaged="$(echo "$_status" | grep ' M' | wc -l )"
-        local staged=$(($_changes - $unstaged))
+        local _changes="$(echo "$_status" | wc -l )"
+        local staged="$(echo "$_status" | grep '  ' | wc -l )"
+        local unstaged=$(($_changes - $staged))
 
         local repo_name="$(git remote show origin -n | grep 'Fetch URL:' | sed -E 's#^.*/(.*)$#\1#' | sed 's#.git$##')"
 
