@@ -1,0 +1,41 @@
+[user]
+	email = adam3salma@gmail.com
+	name = Adam Salma
+
+[core]
+	autocrlf = true
+	safecrlf = false
+
+[alias]
+    s = status .
+    ds = diff --staged
+    l = log --oneline --graph
+    c = commit -m
+    amend = commit --amend -C HEAD
+
+    # Shows all local branches
+    b=for-each-ref --sort=committerdate refs/heads/ --format='%(HEAD) %(color:red)%(refname:short)%(color:reset) - %(authorname) - (%(color:green)%(committerdate:relative)%(color:reset)) %(color:yellow bold)%(objectname:short)%(color:reset) - %(color:blue)%(contents:subject)%(color:reset)'
+
+    # Shows all remote branches
+    br=for-each-ref --sort=committerdate refs/remotes/ --format='%(HEAD) %(color:red)%(refname:short)%(color:reset) - %(authorname) - (%(color:green)%(committerdate:relative)%(color:reset)) %(color:yellow bold)%(objectname:short)%(color:reset) - %(color:blue)%(contents:subject)%(color:reset)'
+
+[filter "lfs"]
+    # Save the tree if it is in need of whitespace clearing
+    fixws = !"\
+      if (! git diff-files --quiet .) && \
+         (! git diff-index --quiet --cached HEAD) ; then \
+        git commit -m FIXWS_SAVE_INDEX && \
+        git stash save FIXWS_SAVE_TREE && \
+        git rebase --whitespace=fix HEAD~ && \
+        git stash pop && \
+        git reset --soft HEAD~ ; \
+      elif (! git diff-index --quiet --cached HEAD) ; then \
+        git commit -m FIXWS_SAVE_INDEX && \
+        git rebase --whitespace=fix HEAD~ && \
+        git reset --soft HEAD~ ; \
+      fi"
+
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
+	required = true
